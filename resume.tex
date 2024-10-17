@@ -1,0 +1,333 @@
+\documentclass[a4paper,11pt]{article}
+
+% Language and encoding
+\usepackage[english]{babel}
+
+% Page layout
+\usepackage[margin=1in]{geometry}
+
+% Typography
+\usepackage{microtype}
+\usepackage{setspace}
+\usepackage{titlesec}
+
+% Colors and links
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+
+
+% Tables
+\usepackage{tabularx}
+\usepackage{array}
+
+\usepackage{fontspec}
+
+\usepackage{multicol}
+\usepackage{xspace}
+\usepackage{enumitem}
+
+\titlespacing*{\section}{0pt}{1.5ex plus .1ex minus .1ex}{1.5ex plus .1ex}
+
+\newfontfamily\montserratBold{Montserrat}[
+  Path = ./fonts/,
+  Extension = .ttf,
+  UprightFont = *-SemiBold,
+  BoldFont = *-Bold,
+  ItalicFont = *-MediumItalic,
+  BoldItalicFont = *-BoldItalic,
+  Ligatures = TeX,
+  Scale = 1.0
+]
+
+% Font settings
+\setmainfont{Montserrat}[
+  Path = ./fonts/,
+  Extension = .ttf,
+  UprightFont = *-Medium,
+  BoldFont = *-SemiBold,
+  ItalicFont = *-MediumItalic,
+  BoldItalicFont = *-SemiBoldItalic,
+  Ligatures = TeX,
+  Scale = 1.0
+]
+
+\geometry{left=0.7cm, right=0.7cm, top=0.7cm, bottom=0.7cm}
+
+% Custom commands
+\newcommand{\resumetitle}[1]{{\fontsize{10.4pt}{13pt}\selectfont\addfontfeatures{LetterSpace=12.0}\montserratBold\textbf{#1}\xspace}}
+
+\newcommand{\resumeprofession}[1]{{\fontsize{7pt}{10.8pt}\selectfont\addfontfeatures{LetterSpace=32.0}#1\xspace}}
+
+\newcommand{\sectiontitle}[1]{{\fontsize{6.9pt}{7.6pt}\selectfont\montserratBold\addfontfeatures{LetterSpace=2.0}\textbf{#1}\xspace}}
+
+
+\newcommand{\experiencetitle}[1]{{\fontsize{6.7pt}{10.2pt}\selectfont\bfseries\montserratBold\addfontfeatures{LetterSpace=3.0}\textbf{#1}\xspace}}
+
+\newcommand{\para}[1]{{\fontsize{6.1pt}{9.792pt}\selectfont\addfontfeatures{LetterSpace=0.8}\textbf{#1}\xspace}}
+
+\newcommand{\paraitalic}[1]{{\fontsize{6.1pt}{10.492pt}\selectfont\addfontfeatures{LetterSpace=4.0}\textit{#1}\xspace}}
+
+\newcommand{\linkfont}[1]{{\fontsize{6.1pt}{10.492pt}\selectfont\addfontfeatures{LetterSpace=1.0}\textit{\underline{#1}}\xspace}}
+
+% Custom colors
+\definecolor{customblack}{HTML}{111517}
+\definecolor{customgray}{HTML}{6A6868}
+\definecolor{customwhite}{HTML}{F4F4F4}
+\definecolor{customblue}{HTML}{6A5EEF}
+
+
+\newcommand{\customlink}[2]{\href{#1}{\colorbox{customwhite}{\linkfont{#2}}}}%
+\newcommand{\customball}[1]{\hspace{3pt}\textcolor{customgray}{·}\hspace{3pt}{#1}}%
+\newcommand{\customballopara}[2]{\hspace{3pt}\raisebox{-0.12ex}{\textcolor{customgray}{\textbullet}\hspace{3pt}{\para{\color{#1}#2}}}}%
+
+\newcommand{\firstskill}[1]{\hspace{3pt}{\para{\color{customgray}#1}}}%
+\newcommand{\skill}[1]{\para{\color{customgray}#1}}%
+\newcommand{\lang}[1]{\paraitalic{\color{customblack}#1}}%
+\newcommand{\langseparator}{\hspace{2pt}\fontsize{5pt}{9pt}\textcolor{customgray}{,}\hspace{2pt}}%
+
+\newcommand{\str}[1]{%
+  {\color{customblack}\textbf{#1}}%
+}
+\newcommand{\customcol}[2]{%
+  \begin{tabularx}{\linewidth}{@{}p{155pt}@{}X@{}}%
+    \para{\color{customblack}#1}&#2%
+  \end{tabularx}%
+}
+
+\newcommand{\customcolnarrow}[2]{%
+  \begin{tabularx}{\linewidth}{@{}p{155pt}@{}X@{}}%
+    \para{\color{customblack}#1}&#2%
+  \end{tabularx}%
+}
+\newcommand{\sectioncontainer}[2]{%
+  \sectiontitle{#1}\\[1.1ex]%
+  \begin{minipage}{\linewidth}%
+	#2%
+  \end{minipage}%
+}
+
+\newcommand{\sectioncontainerrow}[2]{%
+\begin{minipage}[t]{\dimexpr\linewidth-10pt\relax}%
+\begin{tabular}{@{}p{56pt}l@{}}%
+\sectiontitle{\color{customblack}#1} & #2%
+\end{tabular}%
+\end{minipage}%
+}
+\newcommand{\sectioncontainerdoublerow}[4]{%
+\begin{tabular}{@{}p{60pt}p{90pt}p{50pt}p{\linewidth}@{}}%
+  \sectiontitle{\color{customblack}#1} & #2 & \sectiontitle{\color{customblack}#3} & #4%
+\end{tabular}%
+}
+\newcommand{\experiencecontainer}[5]{%
+  \experiencetitle{#1}#2\\[0.2ex]% title and location
+  #3% Engagements
+  #4% Tasks
+  #5% Skills
+}
+
+\newlist{myitemize}{itemize}{1}
+
+\setlist*[myitemize,1]{
+  label=\raisebox{-0.18ex}{\textbullet},
+  leftmargin=3mm,
+  labelsep=0.5em,
+  topsep=0em,
+  itemsep=0em,
+  parsep=0em,
+  partopsep=0em,
+  itemindent=0em,
+  listparindent=0em,
+  labelwidth=0em,
+  itemindent=0em,
+  parsep=0em,
+}
+
+% Document settings
+\setlength{\parindent}{0pt}
+\pagecolor{customwhite}
+\color{customblack}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=customblack,
+    linkcolor=customblue,
+    citecolor=customblack,
+    filecolor=customblack,
+	pdfnewwindow=true,
+	pdfstartview={XYZ null null 1}
+    pdftitle={Mohamed Amine SAYAGH \-- Software Developer \-- Resume},
+    pdfauthor={Mohamed Amine SAYAGH},
+    pdfsubject={Resume},
+}
+
+
+\pagestyle{empty}
+\linespread{0.8}
+
+\begin{document}
+
+\begin{center}%
+	\label{sec:header}\linespread{1}\selectfont
+	\resumetitle{Mohamed Amine SAYAGH}\\
+	\resumeprofession{\color{customgray}SOFTWARE DEVELOPER}\\
+\end{center}
+\setlength{\columnsep}{0.4cm}{\raggedcolumns}
+\raggedcolumns% Reduce the margin on each column
+\renewcommand{\arraystretch}{1.1} % Adjust this value to increase/decrease line spacing
+\begin{multicols}{3}%
+	\label{sec:contact}\begin{tabularx}{\linewidth}{@{}Xr@{}}%
+		\para{\color{customgray}Email:}      & \customlink{mailto:contact@masayagh.com?subject=Resume Inquiry}{contact@masayagh.com} \\%
+		\para{\color{customgray}Phone (Ma):} & \customlink{tel:+212616137124}{(+212) 616\--137124}                                   \\%
+	\end{tabularx}
+	\begin{tabularx}{\linewidth}{@{}Xr@{}}%
+		\para{\color{customgray}LinkedIn:} & \customlink{https://www.linkedin.com/in/mohamedamine-sayagh/}{linkedin.com/in/masayagh} \\%
+		\para{\color{customgray}GitHub:}   & \customlink{https://github.com/aminesayagh/}{github.com/aminesayagh}                    \\%
+	\end{tabularx}
+	\begin{tabularx}{\linewidth}{@{}Xr@{}}%
+		\para{\color{customgray}Programming Lang:} & \para{\color{customgray}TypeScript, PHP, Golang} \\[0.6ex]
+		\para{\color{customgray}Portfolio:}        & \customlink{https://masayagh.com/}{masayagh.com} \\%
+	\end{tabularx}
+\end{multicols}
+\sectioncontainer{SUMMARY OF EXPERIENCE}{%
+\label{sec:summary}\para{\color{customgray}Committed software developer professional with over \str{7 years} of experience. Successfully Directed and delivered over \str{13 projects} for \str{international clients} across various industries, consistently enhancing process delivery and enabling \str{personalized experiences} at multiple stages.}
+}\\[1.4ex]
+\sectioncontainer{PROFESSIONAL EXPERIENCES}{%
+	\label{sec:experiences}%
+	\experiencecontainer{%
+		\label{exp:independentfreelancer}%
+		\color{customblack}Independent Freelancer
+	}{%
+		\para{\color{customgray}Business Clients}
+	}{%
+		\para{\color{customgray}Technical Consultant}\customball{\para{\color{customgray}Remote}}\customball{\paraitalic{\color{customgray}August 2024 \-- Present}}\vspace{0.14em}%
+	}{%
+		\begin{myitemize}
+			\item \para{\color{customgray}\str{Crafted} e-commerce platforms for brand identities, including the luxury fashion brand \str{"French Dandy"} and the jewelry brand \str{"Maud Diamand"} in Dubai and Brazil. Ensured \str{optimal performance} and \str{responsiveness} across various devices to enhance user engagement and uphold brand image.}%
+			\item \para{\color{customgray}\str{Worked closely} with international teams to \str{customize solutions} for local markets, ensuring cultural relevance, seamless user experience, and compliance with regional regulations.}%
+		\end{myitemize}\vspace{0.14em}
+	}{%
+		\para{\color{customblack}Key Skills:}\hspace{2pt}\lang{JavaScript/TypeScript}\langseparator{}\lang{Next.js}\langseparator{}\skill{E-commerce Development}\langseparator{}\skill{UI/UX Design}\langseparator{}\skill{Internationalization}\langseparator{}\skill{Payment Gateway Integration}\langseparator{}\skill{Performance Optimization}
+	}\\[0.62ex]
+	\experiencecontainer{%
+    	\label{exp:cybercohesion}%
+		\color{customblack}Cyber Cohesion
+	}{%
+		\para{\color{customgray}Security Community's Firm}
+	}{%
+		\para{\color{customgray}Research \& Development, Web Tech Lead, Infra development}\customball{\para{\color{customgray}Self-Employed, Singapore}}\customball{\paraitalic{\color{customgray}May 2023 \-- July 2024}}\vspace{0.14em}%
+	}{%
+		\begin{myitemize}
+			\item \para{\color{customgray}\str{Engineered} a \str{Golang RESTful API} integrated with \str{Kubernetes controller-runtime} to realize infrastructure applications for a security competitions domain. This effort enhanced role-based deployment isolation, \str{increasing deployment productivity by over 25\%} within one month, collaborating with a three-member team.}%
+			\item \para{\color{customgray}\str{Led and developed} essential software components for a \str{microservices platform} by automating internal development standards, \str{reducing maintenance efforts by 60\%} and \str{upholding} OWASP web security standards over seven months with a six-member team.}%
+			\item \para{\color{customgray}Optimized \str{NoSQL database} schemas and indexes by refining structures and common patterns reaching \str{an 11\% reduction in server query response time} in two months.}%
+		\end{myitemize}\vspace{0.14em}
+	}{%
+		\para{\color{customblack}Key Skills:}\hspace{2pt}\lang{Golang}\langseparator{}\lang{Bash}\langseparator{}\lang{Javascript / TypeScript}\langseparator{}\lang{PHP}\langseparator{}\skill{Docker \& Docker Compose}\langseparator{}\skill{Kubernetes}\langseparator{}\skill{Nginx}\langseparator{}\skill{MongoDB}\langseparator{}\skill{MySQL}\langseparator{}\skill{RESTful APIs}\langseparator{}\skill{CI/CD pipeline development}
+	}\\[0.62ex]
+	\experiencecontainer{%
+		\label{exp:jonasdigitalagency}%
+		\color{customblack}Jonas Digital Agency
+	}{%
+		\para{\color{customgray}SMMA Digital Agency}
+	}{%
+		\para{\color{customgray}Full Stack Web Developer}\customball{\para{\color{customgray}Freelance, London}}\customball{\paraitalic{\color{customgray}July 2023 \-- Present}}\vspace{0.14em}%
+	}{%
+		\begin{myitemize}
+			\item \para{\color{customgray}\str{Executed} NGINX-based cloud deployment for web solutions on a Hostinger VPS by streamlining \str{CI/CD pipelines}, \str{reducing development cycles by 83\%} within four weeks, followed by ongoing enhancements over five months.}%
+			\item \para{\color{customgray}\str{Completed} seven global full-stack projects with complex third-party systems integration need, \str{including debugging faulty plugins and developing solutions for store management} while maintaining continuous communication with external tech suppliers.}%
+		\end{myitemize}\vspace{0.14em}
+	}{%
+		\para{\color{customblack}Key Skills:}\hspace{2pt}\lang{JavaScript / TypeScript}\langseparator{}\lang{PHP}\langseparator{}\lang{Bash}\langseparator{}\skill{WebHook}\langseparator{}\skill{API Integration}\langseparator{}\skill{Restful API}\langseparator{}\skill{React}\langseparator{}\skill{Cloudflare}\langseparator{}\skill{Nginx}\langseparator{}\skill{Docker}\langseparator{}\skill{MySQL}\langseparator{}\skill{Unit Testing}\langseparator{}\skill{CI/CD}
+	}\\[0.62ex]
+	\experiencecontainer{%
+		\label{exp:lavishtrading}%
+		\color{customblack}Lavish Trading
+	}{%
+		\para{\color{customgray}Investment Agency}
+	}{%
+		\para{\color{customgray}Full Stack Web Developer}\customball{\para{\color{customgray}Freelance, London}}\customball{\paraitalic{\color{customgray}May 2022 \-- July 2022}}\vspace{0.14em}%
+	}{%
+		\begin{myitemize}
+			\item \para{\color{customgray}Produced a \str{user-friendly web solution} for client enrollment in investment plans for a global project managing over \str{\$100 million in active investments}, leveraging the company's \str{12 years of industry expertise} to create a \str{new source of client conversions}.}
+		\end{myitemize}\vspace{0.14em}
+	}
+}\\[1.6ex]
+\sectioncontainer{SKILLS}{\label{sec:skills}
+	\customcol{Cloud Services}{%
+		\firstskill{Google Cloud}\langseparator{}\skill{AWS}\langseparator{}\skill{Oracle Cloud}\langseparator{}\skill{Github Codespaces}\langseparator{}\skill{Heroku}\langseparator{}\skill{Vercel}\langseparator{}\skill{Cloudflare}
+	}
+	\customcol{Containerization and Orchestration}{%
+		\firstskill{Docker}\langseparator{}\skill{Docker Compose}\langseparator{}\skill{Kubernetes}\langseparator{}\skill{NGINX}
+	}
+	\customcol{Programming Languages}{%
+		\firstskill{JavaScript / TypeScript}\langseparator{}\skill{PHP}\langseparator{}\skill{Golang}\langseparator{}\skill{SQL}\langseparator{}\skill{Bash}
+	}
+	\customcolnarrow{Front-end / Back-end}{%
+		\firstskill{React/Next.js}\langseparator{}\skill{Express, Nest}\langseparator{}\skill{Tailwind}\langseparator{}\skill{State Management: Redux}\langseparator{}\skill{Tanstack}\langseparator{}\skill{WordPress}\langseparator{}\skill{Pnpm Monorepo}\langseparator{}\skill{Elasticsearch}
+	}
+	\customcol{Database}{%
+		\firstskill{MySQL}\langseparator{}\skill{MongoDB}\langseparator{}\skill{PostgreSQL}\langseparator{}\skill{Redis}}
+	\customcol{Version Control and CI/CD}{%
+		\firstskill{Git}\langseparator{}\skill{GitHub}\langseparator{}\skill{GitHub Actions}}
+	\customcol{Testing Practices}{%
+		\firstskill{Unit Testing (Jest)}\langseparator{}\skill{Functional Testing (Cypress)}\langseparator{}\skill{Regression Testing (Puppeteer)}\langseparator{}\skill{Integration Testing (Supertest, Postman)}}
+	\customcol{Artificial Intelligence}{%
+		\firstskill{Open AI}\langseparator{}\skill{ChatGPT-4}\langseparator{}\skill{Claude 3.5}\langseparator{}\skill{Copilot}\langseparator{}\skill{Midjourney}\langseparator{}\skill{RAG}\langseparator{}\skill{LangChain}}
+	\customcol{Methodology and Standards}{%
+		\firstskill{Agile}\langseparator{}\skill{SOLID}\langseparator{}\skill{Design Pattern}\langseparator{}\skill{Clean Code}\langseparator{}\skill{Distributed System}\langseparator{}\skill{Serverless}}
+	\customcol{Design}{%
+		\firstskill{UI/UX}\langseparator{}\skill{Design thinking}\langseparator{}\skill{Photoshop}\langseparator{}\skill{Illustrator}\langseparator{}\skill{Figma}
+	}
+}\\[1.2ex]
+\sectioncontainer{PROJECTS}{\label{sec:projects}%
+	\begingroup%
+	\label{proj:code-wrangler}%
+	\customcol{\experiencetitle{\color{customblack}Code Wrangler: Automation prompting}}{\paraitalic{\color{customgray}October 2024 \-- Present} \customball{\linkfont{\href{https://github.com/aminesayagh/Code-Wrangler}{View the project repository}}}}\vspace{0.2em}
+	\begin{myitemize}
+		\item \para{\color{customgray}Built a \str{command-line interface (CLI) tool} with a configurable and resible configuration interface that generates documentation resume from project workspaces extended to an Retrieval-Augmentated Generation (RAG) pipeline, tailored for developers preparing \str{continuous versioned project overviews} for code generation.}
+	\end{myitemize}
+	\endgroup
+	\vspace{0.6em}
+    \begingroup%
+    \label{proj:zec}\label{proj:data-parsing-library}%
+    \customcol{\experiencetitle{\color{customblack}Zec: Data Parsing Orchestration Library}}{\paraitalic{\color{customgray}May 2024 \-- July 2024} \customball{\linkfont{\href{https://github.com/aminesayagh/Zec-Data-Parsing}{View the project documentation}}}}\vspace{0.2em}
+    \begin{myitemize}
+        \item \para{\color{customgray}\str{Authored} a standalone PHP open-source library that \str{introduces a novel method to orchestrate between business-specific data parsers} while maintaining confidentiality. The library leverages schema definitions and modular, extensible configuration management to coordinate parsers without directly handling data parsing.}
+    \end{myitemize}
+    \endgroup
+    \vspace{0.6em}
+    \begingroup%
+    \label{proj:sofiane-pamart}\label{proj:music-nft}\label{proj:oussama-ommar}%
+    \customcol{\experiencetitle{\color{customblack}Music NFT, Artist Sofiane Pamart}}{\paraitalic{\color{customgray}July 2021 \-- One week}}
+    \begin{myitemize}
+        \item \para{\color{customgray}Collaborated in a \str{140-member team}, including \str{42 developers} guided by Oussama Ommar, to develop \str{visual NFTs} for artist Sofiane Pamart, achieving the launch on one week.}
+    \end{myitemize}
+    \endgroup%
+}\\[1.6ex]
+\sectioncontainer{EDUCATION}{%
+	\label{sec:education}%
+	\begingroup
+	\customcol{\para{\color{customblack}Master's in Big Data \& Cloud Computing}}{\para{\color{customgray}University of Hassan II, Casablanca, expected graduation 2025}}\\%
+	\customcol{\para{\color{customblack}Bachelor's in Computer Science}}{\para{\color{customgray}University of Hassan II, Casablanca, 2022 \-- 2023}}\\%
+	\endgroup%
+	\vspace{0em}%
+}\\[0ex]%
+\sectioncontainerrow{APPROVALS}{%
+	\label{references}%
+	\customlink{https://drive.google.com/file/d/1UzBM7WzxPOZkD3ZYToU9FgHYsCCWzD4l/view?usp=drive_link}{Cyber Cohesion}\customball{\customlink{https://docs.google.com/document/d/1Ylvz8PNhcA5ZDxVRzLO0ivu6e3476z1t}{Jonas Digital Agency}}\customball{\customlink{https://drive.google.com/file/d/1Yw9G4V9ci6CJOFIElqGTghFU7WvIJkoA/view}{Lavish Trading}}
+}\\[0ex]%
+\sectioncontainerrow{ACHIEVEMENTS}{%
+	\label{sec:achievement}%
+    \begin{minipage}{\linewidth}
+		\customlink{https://www.lavish.masayagh.com/}{Lavish Trading}%
+		\customball{\customlink{https://www.french-dandy.com/}{French Dandy}}%
+		\customball{\customlink{https://www.happy-water.masayagh.com/}{Happy Water}}%
+		\customball{\customlink{https://www.greening-energy.com/}{Greening Energy}}%
+		\customball{\customlink{https://www.coreas-ht.com/}{Coreas}}%
+		\customball{\customlink{https://www.hordestudio.com/}{Horde Studio}}%
+		\customball{\customlink{https://www.cybercohesions.com/}{Cyber Cohesion}}%
+		\customball{\customlink{https://www.figma.com/design/ydOVsavgbcL6QwFJiyUuBO/Portfolio?m=auto&t=NP0EyAcVDHp6E6nb-1}{Figma Portfolio}}%
+	\end{minipage}%
+}\\[0.2ex]
+\sectioncontainerdoublerow{LANGUAGES}{\para{\color{customgray}English}\customball{\para{\color{customgray}French}}\customball{\para{\color{customgray}Arabic}}}{ACTIVITIES}{\para{\color{customgray}Tech writing (see\customlink{https://www.linkedin.com/in/mohamedamine-sayagh/recent-activity/all/}{LinkedIn}or\customlink{https://medium.com/@masayagh}{Medium})}\customball{\para{\color{customgray}Open source contributor}}\customball{\para{\color{customgray}Tech mentoring}}}
+\end{document}
