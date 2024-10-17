@@ -36,7 +36,7 @@ pipeline {
                     sh "docker run -d -p 80:80 --name tp2-container younesmakhchan/tp4:$BUILD_NUMBER"
                 }
             }
-        }
-    }
+         }
+    }
 
 }
