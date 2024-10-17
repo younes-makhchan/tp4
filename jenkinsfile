@@ -25,14 +25,18 @@ pipeline {
                 }
             }
         }
-        stage('Publish Image') {
+       stage('Deploy image') {
             steps {
                 script {
-                    docker.withRegistry('', registryCredential) {
-                        dockerImage.push()
-                    }
+                    sh """
+                    docker stop tp2-container || true
+                    docker rm tp2-container || true
+                    """
+
+                    sh "docker run -d -p 80:80 --name tp2-container younesmakhchan/tp4:$BUILD_NUMBER"
                 }
             }
-        }
-    }
+        }
+    }
+
 }
